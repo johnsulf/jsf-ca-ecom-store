@@ -1,12 +1,40 @@
-import * as React from 'react';
+import { getAllProducts } from '@/api/product-api';
+import { Product } from '@/types/product';
+import { useEffect, useState } from 'react';
+import ProductCard from './components/ProductCard';
 
-export interface IHomeProps {
-}
+export default function Home() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
-export default function Home (props: IHomeProps) {
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const all = await getAllProducts();
+        setProducts(all);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Unknown error');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  if (loading) return <p>Loading…</p>;
+  if (error) return <p>Error: {error}</p>;
+
   return (
     <div>
-      Home works!
+      <h1>Products</h1>
+      <div className="grid grid-cols-3 gap-4">
+        {products.map((p) => (
+          <ProductCard key={p.id} product={p} />
+        ))}
+      </div>
     </div>
   );
 }
