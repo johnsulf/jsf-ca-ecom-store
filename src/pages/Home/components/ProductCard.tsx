@@ -1,34 +1,62 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Product } from '@/types/product';
+import { ArrowRight, Star, StarHalf } from 'lucide-react';
 
 export interface IProductCardProps {
   product: Product;
 }
 
 export default function ProductCard({ product }: IProductCardProps) {
+  const discount: boolean = product.discountedPrice < product.price;
+  const discountPercentage: number = Math.round(
+    ((product.price - product.discountedPrice) / product.price) * 100,
+  );
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{product.title}</CardTitle>
+        <CardTitle className="relative">
+          <img
+            className="h-48 w-full rounded-t-xl object-cover"
+            src={product.image.url}
+            alt={product.image.alt}
+          />
+          {discount && (
+            <div className="absolute top-0 right-0 rounded-tr-xl rounded-bl bg-red-500 p-2 text-white">
+              <p> -{discountPercentage}%</p>
+            </div>
+          )}
+        </CardTitle>
       </CardHeader>
       <CardContent>
-        <img src={product.image.url} alt={product.image.alt} />
-        <p>{product.description}</p>
-        <p>Price: {product.price}</p>
-        <p>Discounted price: {product.discountedPrice}</p>
-        <p>Rating: {product.rating}</p>
-        <p>Tags: {product.tags.join(', ')}</p>
-        <p>Reviews:</p>
-        <ul>
-          {product.reviews.map((review) => (
-            <li key={review.id}>
-              <p>Username: {review.username}</p>
-              <p>Rating: {review.rating}</p>
-              <p>Description: {review.description}</p>
-            </li>
-          ))}
-        </ul>
+        <h2>{product.title}</h2>
+        <p className="text-muted-foreground text-xs">{product.description}</p>
+        <div className="my-2 flex items-center justify-between">
+          <p className="text-2xl text-slate-800">${product.discountedPrice}</p>
+          <div className="flex items-center">
+            {Array.from({ length: Math.floor(product.rating) }, (_, i) => (
+              <Star key={i} className="text-yellow-500" />
+            ))}
+            {product.rating % 1 >= 0.5 && (
+              <StarHalf className="text-yellow-500" />
+            )}
+            {product.rating === 0 && (
+              <p className="text-muted-foreground">No reviews</p>
+            )}
+          </div>
+        </div>
       </CardContent>
+      <CardFooter>
+        <Button className="w-full bg-slate-800">
+          <ArrowRight /> More details
+        </Button>
+      </CardFooter>
     </Card>
   );
 }
