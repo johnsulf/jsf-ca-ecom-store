@@ -5,6 +5,7 @@ import {
   NavigationMenuList,
 } from '@/components/ui/navigation-menu';
 import { ThemeToggle } from '@/layout/Header/components/ThemeToggle';
+import { NavLink } from 'react-router-dom';
 import CartIcon from './components/CartIcon';
 
 export interface IHeaderProps {}
@@ -16,10 +17,14 @@ export default function Header(props: IHeaderProps) {
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
-              <NavigationMenuLink href="/">Home</NavigationMenuLink>
+              <NavigationMenuLink asChild>
+                <NavLink to="/">Home</NavLink>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuLink href="/contact">Contact</NavigationMenuLink>
+              <NavigationMenuLink asChild>
+                <NavLink to="/contact">Contact</NavLink>
+              </NavigationMenuLink>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
