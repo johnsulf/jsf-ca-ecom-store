@@ -38,7 +38,7 @@ export default function ProductCard({ product }: IProductCardProps) {
         <h2>{product.title}</h2>
         <p className="text-muted-foreground text-xs">{product.description}</p>
         <div className="my-2 flex items-center justify-between">
-          <p className="text-2xl text-slate-800">${product.discountedPrice}</p>
+          <p className="text-2xl">${product.discountedPrice}</p>
           <div className="flex items-center">
             {Array.from({ length: Math.floor(product.rating) }, (_, i) => (
               <Star key={i} className="text-yellow-500" />
@@ -53,7 +53,7 @@ export default function ProductCard({ product }: IProductCardProps) {
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="w-full bg-slate-800">
+        <Button className="w-full">
           <ArrowRight /> More details
         </Button>
       </CardFooter>
