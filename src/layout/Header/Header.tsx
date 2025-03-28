@@ -1,12 +1,29 @@
-import * as React from 'react';
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from '@/components/ui/navigation-menu';
 
-export interface IHeaderProps {
-}
+export interface IHeaderProps {}
 
-export default function Header (props: IHeaderProps) {
+export default function Header(props: IHeaderProps) {
   return (
     <header>
-      Header works!
+      <NavigationMenu>
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuLink>
+              <a href="/">Home</a>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink>
+              <a href="/contact">Contact</a>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
     </header>
   );
 }
