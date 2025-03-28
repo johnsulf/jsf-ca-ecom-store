@@ -9,7 +9,7 @@ export interface IHeaderProps {}
 
 export default function Header(props: IHeaderProps) {
   return (
-    <header>
+    <header className="bg-secondary p-4">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
