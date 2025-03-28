@@ -2,8 +2,10 @@ export interface IFooterProps {}
 
 export default function Footer(props: IFooterProps) {
   return (
-    <footer className="bg-primary absolute bottom-0 w-full p-4 text-center text-white">
-      <p>Copyright 2025</p>
+    <footer className="border-t p-4">
+      <div className="text-muted-foreground text-center text-sm">
+        <p>Copyright 2025</p>
+      </div>
     </footer>
   );
 }

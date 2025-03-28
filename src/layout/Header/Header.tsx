@@ -1,3 +1,4 @@
+import { ThemeToggle } from '@/components/theme/theme-toggle';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -9,21 +10,20 @@ export interface IHeaderProps {}
 
 export default function Header(props: IHeaderProps) {
   return (
-    <header className="bg-secondary p-4">
-      <NavigationMenu>
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuLink>
-              <a href="/">Home</a>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink>
-              <a href="/contact">Contact</a>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
+    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky border-b p-4 backdrop-blur">
+      <div className="mx-auto flex max-w-3xl items-center justify-between">
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuLink href="/">Home</NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink href="/contact">Contact</NavigationMenuLink>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+        <ThemeToggle />
+      </div>
     </header>
   );
 }
