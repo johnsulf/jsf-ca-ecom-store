@@ -1,4 +1,4 @@
-import { ThemeProvider } from './providers/theme-provider';
+import { ThemeProvider } from './providers/ThemeProvider';
 import AppRoutes from './routes';
 
 function App() {
