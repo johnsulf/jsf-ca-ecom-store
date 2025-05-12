@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
+import { toast } from 'sonner'
 
 type FormState = {
   name: string
@@ -49,15 +50,17 @@ export default function Contact() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    const validation = validate(form)
-    if (Object.keys(validation).length > 0) {
-      setErrors(validation)
-    } else {
-      console.log(form)
-      // optionally reset form:
-      setForm({ name: '', subject: '', email: '', body: '' })
-      setErrors({})
+    const errs = validate(form)
+    if (Object.keys(errs).length) {
+      setErrors(errs)
+      return
     }
+  
+    console.log(form)
+    toast.success('Message sent! We’ll be in touch soon.')
+    
+    setForm({ name: '', subject: '', email: '', body: '' })
+    setErrors({})
   }
 
   return (

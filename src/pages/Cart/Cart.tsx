@@ -2,6 +2,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { useCart } from '@/providers/cart'
+import { toast } from 'sonner'
 
 export default function Cart() {
   const { items, removeFromCart, clearCart } = useCart()
@@ -11,6 +12,11 @@ export default function Cart() {
     (sum, i) => sum + i.product.discountedPrice * i.quantity,
     0
   )
+
+  function handleClear() {
+    clearCart()
+    toast(`🗑️ Cart cleared`)
+  }
 
   if (items.length === 0) {
     return (
@@ -76,7 +82,7 @@ export default function Cart() {
         <Button onClick={() => navigate('/checkout')}>
           Checkout
         </Button>
-        <Button variant="outline" onClick={clearCart}>
+        <Button variant="outline" onClick={handleClear}>
           Clear cart
         </Button>
       </div>

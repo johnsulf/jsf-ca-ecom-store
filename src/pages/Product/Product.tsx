@@ -9,6 +9,7 @@ import {
   CardContent,
 } from '@/components/ui/card'
 import { Star, StarHalf } from 'lucide-react'
+import { toast } from 'sonner'
 
 export interface IProductProps {}
 
@@ -50,6 +51,11 @@ export default function Product(props: IProductProps) {
     ? Math.round(((price - discountedPrice) / price) * 100)
     : 0
 
+    function handleAdd() {
+      addToCart(product!)
+      toast.success(`"${product!.title}" added to cart`)
+    }
+
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       {/* Breadcrumbs */}
@@ -83,13 +89,8 @@ export default function Product(props: IProductProps) {
             )}
           </div>
 
-          <Button
-            size="lg"
-            className="w-full"
-            onClick={() => addToCart(product)}
-          >
-            Add to cart
-          </Button>
+          <Button onClick={handleAdd}>Add to cart</Button>
+
         </CardContent>
       </Card>
 
