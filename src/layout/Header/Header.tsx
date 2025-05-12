@@ -8,9 +8,7 @@ import { ThemeToggle } from '@/layout/Header/components/ThemeToggle';
 import { NavLink } from 'react-router-dom';
 import CartIcon from './components/CartIcon';
 
-export interface IHeaderProps {}
-
-export default function Header(props: IHeaderProps) {
+export default function Header() {
   return (
     <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky border-b p-4 backdrop-blur">
       <div className="flex items-center justify-between">

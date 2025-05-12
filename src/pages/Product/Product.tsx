@@ -11,9 +11,7 @@ import {
 import { Star, StarHalf } from 'lucide-react'
 import { toast } from 'sonner'
 
-export interface IProductProps {}
-
-export default function Product(props: IProductProps) {
+export default function Product() {
   const { id } = useParams<{ id: string }>()
   const { addToCart } = useCart()
 
@@ -43,7 +41,6 @@ export default function Product(props: IProductProps) {
     price,
     discountedPrice,
     reviews,
-    rating,
   } = product
 
   const hasDiscount = discountedPrice < price
