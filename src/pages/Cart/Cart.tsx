@@ -73,7 +73,9 @@ export default function Cart() {
 
       {/* Actions */}
       <div className="flex gap-4">
-        <Button onClick={() => navigate('/checkout-success')}>Checkout</Button>
+        <Button onClick={() => navigate('/checkout')}>
+          Checkout
+        </Button>
         <Button variant="outline" onClick={clearCart}>
           Clear cart
         </Button>
