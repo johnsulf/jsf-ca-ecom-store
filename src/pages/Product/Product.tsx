@@ -58,11 +58,6 @@ export default function Product(props: IProductProps) {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
-      {/* Breadcrumbs */}
-      <nav className="text-sm text-muted-foreground">
-        <a href="/">Home</a> &gt;{' '}
-        {title}
-      </nav>
       {/* Hero */}
       <Card className="flex flex-col md:flex-row">
         <img

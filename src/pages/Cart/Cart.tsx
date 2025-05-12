@@ -31,11 +31,6 @@ export default function Cart() {
 
   return (
     <div className="space-y-6">
-      {/* Breadcrumbs */}
-      <nav className="text-sm text-muted-foreground">
-        <a href="/">Home</a> &gt;{' '}
-        <a href="/cart">Cart</a>
-      </nav>
       {/* Hero */}
       <h1 className='mb-8'>Cart</h1>
       <ul className="space-y-4">

@@ -64,11 +64,7 @@ export default function Contact() {
   }
 
   return (
-    <div>
-      {/* Breadcrumbs */}
-      <nav className="text-sm text-muted-foreground">
-        <a href="/">Home</a> &gt; <a href="/contact">Contact</a>
-      </nav>
+    <>
       {/* Form */}
       <div className="max-w-xl mx-auto mt-8 space-y-6">
         <h1>Contact Us</h1>
@@ -166,6 +162,6 @@ export default function Contact() {
           </Button>
         </form>
       </div>
-    </div>
+    </>
   )
 }
