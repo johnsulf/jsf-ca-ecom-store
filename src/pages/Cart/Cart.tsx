@@ -25,7 +25,13 @@ export default function Cart() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Your Cart</h1>
+      {/* Breadcrumbs */}
+      <nav className="text-sm text-muted-foreground">
+        <a href="/">Home</a> &gt;{' '}
+        <a href="/cart">Cart</a>
+      </nav>
+      {/* Hero */}
+      <h1 className='mb-8'>Cart</h1>
       <ul className="space-y-4">
         {items.map(({ product, quantity }) => (
           <li key={product.id} className="flex items-center justify-between">
@@ -59,11 +65,13 @@ export default function Cart() {
         ))}
       </ul>
 
+      {/* Total */}
       <div className="flex items-center justify-between pt-4 border-t">
         <p className="text-lg font-bold">Total:</p>
         <p className="text-lg font-bold">${total.toFixed(2)}</p>
       </div>
 
+      {/* Actions */}
       <div className="flex gap-4">
         <Button onClick={() => navigate('/checkout-success')}>Checkout</Button>
         <Button variant="outline" onClick={clearCart}>
