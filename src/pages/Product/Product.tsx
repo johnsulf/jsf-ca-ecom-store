@@ -8,9 +8,9 @@ import {
   Card,
   CardContent,
 } from '@/components/ui/card'
-import { Star, StarHalf } from 'lucide-react'
 import { toast } from 'sonner'
 import Rating from '@/components/Rating'
+import { FaStar, FaStarHalfStroke, FaRegStar } from 'react-icons/fa6';
 
 export default function Product() {
   const { id } = useParams<{ id: string }>()
@@ -98,11 +98,18 @@ export default function Product() {
             {reviews.map((r) => (
               <li key={r.id} className="space-y-1">
                 <p className="font-medium">{r.username}</p>
-                <div className="flex items-center space-x-2 text-yellow-500">
+                <div className="flex items-center text-yellow-500">
                   {Array.from({ length: Math.floor(r.rating) }).map((_, i) => (
-                    <Star key={i} />
+                    <FaStar key={i} />
                   ))}
-                  {r.rating % 1 >= 0.5 && <StarHalf />}
+                  {Array.from({ length: 5 - Math.floor(r.rating) - (r.rating % 1 >= 0.5 ? 1 : 0) }).map((_, i) => (
+                    <FaRegStar key={i + Math.floor(r.rating)} />
+                  ))}
+                  {r.rating % 1 >= 0.5 && <FaStarHalfStroke />}
+
+                  <span className="ml-2 text-sm text-primary">
+                    {Number.isInteger(r.rating) ? r.rating : r.rating.toFixed(0)} / 5
+                  </span>
                 </div>
                 <p className="text-muted-foreground">{r.description}</p>
               </li>

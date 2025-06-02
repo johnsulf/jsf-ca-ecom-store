@@ -1,4 +1,3 @@
-
 import { FaStar, FaStarHalfStroke, FaRegStar } from 'react-icons/fa6';
 
 type RatingProps = {
