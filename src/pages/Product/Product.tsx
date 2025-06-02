@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/card'
 import { Star, StarHalf } from 'lucide-react'
 import { toast } from 'sonner'
+import Rating from '@/components/Rating'
 
 export default function Product() {
   const { id } = useParams<{ id: string }>()
@@ -65,7 +66,8 @@ export default function Product() {
 
         <CardContent className="flex-1 p-6">
           <h1 className="mb-4">{title}</h1>
-          <p className="text-muted-foreground mb-4">{description}</p>
+          <Rating rating={product.rating} reviewsCount={product.reviews.length} />
+          <p className="text-muted-foreground my-4">{description}</p>
 
           <div className="flex items-center space-x-4 mb-6">
             <p className="text-2xl font-semibold">${discountedPrice}</p>

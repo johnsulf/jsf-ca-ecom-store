@@ -3,8 +3,9 @@ import {
   Card, CardContent, CardFooter, CardHeader, CardTitle,
 } from '@/components/ui/card'
 import { Product } from '@/types/product'
-import { ArrowRight, Star, StarHalf } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import Rating from '@/components/Rating'
 
 export interface IProductCardProps {
   product: Product
@@ -17,6 +18,7 @@ export default function ProductCard({ product }: IProductCardProps) {
   const discountPct = Math.round(((price - discountedPrice) / price) * 100)
 
   return (
+    <a href={`/product/${id}`} className="no-underline">
     <Card className="flex flex-col">
       <CardHeader>
         <CardTitle className="relative p-0">
@@ -38,26 +40,19 @@ export default function ProductCard({ product }: IProductCardProps) {
         <p className="text-muted-foreground text-xs mb-2">{description}</p>
         <div className="flex items-center justify-between mb-4">
           <p className="text-2xl">${discountedPrice}</p>
-          <div className="flex items-center">
-            {Array.from({ length: Math.floor(rating) }, (_, i) => (
-              <Star key={i} className="text-yellow-500" />
-            ))}
-            {rating % 1 >= 0.5 && <StarHalf className="text-yellow-500" />}
-            {rating === 0 && (
-              <p className="text-muted-foreground text-xs">No reviews</p>
-            )}
-          </div>
+          <Rating rating={rating} reviewsCount={product.reviews.length} />
         </div>
       </CardContent>
       
       <CardFooter className="p-0 mt-auto">
         <Button
-          className="w-full rounded-none rounded-b-xl"
+          className="w-full rounded-none rounded-b-xl cursor-pointer"
           onClick={() => navigate(`/product/${id}`)}
         >
           <ArrowRight className="mr-2" /> More details
         </Button>
       </CardFooter>
     </Card>
+    </a>
   )
 }
