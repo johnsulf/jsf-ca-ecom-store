@@ -1,4 +1,5 @@
-import { Star, StarHalf } from 'lucide-react'; 
+
+import { FaStar, FaStarHalfStroke, FaRegStar } from 'react-icons/fa6';
 
 type RatingProps = {
   rating: number;
@@ -11,27 +12,31 @@ function Rating({ rating, reviewsCount }: RatingProps) {
 
   return (
     <div className="flex items-center">
-      {Array.from({ length: fullStars }, (_, i) => (
-        <Star key={i} className="text-yellow-500" />
-      ))}
+        {Array.from({ length: fullStars }, (_, i) => (
+        <FaStar key={i} className="text-yellow-500" />
+        ))}
 
-      {hasHalfStar && <StarHalf className="text-yellow-500" />}
+        {Array.from({ length: 5 - fullStars - (hasHalfStar ? 1 : 0) }, (_, i) => (
+            <FaRegStar key={i + fullStars} className="text-yellow-500" />
+        ))}
 
-      {rating > 0 && (
+        {hasHalfStar && <FaStarHalfStroke className="text-yellow-500" />}
+
+        {rating > 0 && (
         <span className="ml-2 text-sm">
-          {Number.isInteger(rating) ? rating : rating.toFixed(1)} / 5
+            {Number.isInteger(rating) ? rating : rating.toFixed(1)} / 5
         </span>
-      )}
+        )}
 
-      {reviewsCount > 0 && (
+        {reviewsCount > 0 && (
         <span className="ml-2 text-sm text-muted-foreground">
-          ({reviewsCount})
+            ({reviewsCount})
         </span>
-      )}
+        )}
 
-      {rating === 0 && reviewsCount === 0 && (
-        <p className="text-muted-foreground text-xs">No reviews</p>
-      )}
+        {rating === 0 && reviewsCount === 0 && (
+        <p className="text-muted-foreground text-xs ml-1">No reviews</p>
+        )}
     </div>
   );
 }
