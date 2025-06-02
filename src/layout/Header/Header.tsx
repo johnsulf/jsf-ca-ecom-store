@@ -13,7 +13,9 @@ export default function Header() {
     <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky border-b p-4 backdrop-blur">
       <div className="flex items-center justify-between">
         <div className='flex items-center gap-4'>
-          <img src="assets/ecom.svg" className="bg-white rounded-full p-1" width="60" alt="ecom store logo" />
+          <a href="/">
+            <img src="assets/ecom.svg" className="bg-white rounded-full p-1" width="60" alt="ecom store logo" />
+          </a>
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
