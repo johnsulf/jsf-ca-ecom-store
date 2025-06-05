@@ -1,54 +1,56 @@
-# React + TypeScript + Vite
+# JSF CA Ecom Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple eCommerce demo built with **React**, **TypeScript** and **Vite**. It fetches product data from the [Noroff online shop API](https://v2.api.noroff.dev/online-shop) and demonstrates routing, state management and form handling.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Product listing with search
+- Detailed product pages including rating and reviews
+- Shopping cart stored in `localStorage`
+- Checkout confirmation page
+- Contact form with client side validation
+- Light/dark theme toggle
 
-## Expanding the ESLint configuration
+## Development
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the dev server:
+   ```bash
+   npm run dev
+   ```
+   The app will be available at [http://localhost:5173](http://localhost:5173) by default.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+## Building for production
+
+```bash
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+You can preview the production build locally with:
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    "react-x": reactX,
-    "react-dom": reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs["recommended-typescript"].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
+```bash
+npm run preview
 ```
+
+## Linting
+
+Run ESLint to check the code style:
+
+```bash
+npm run lint
+```
+
+## Project structure
+
+- `src/api` – API helpers
+- `src/components` – reusable UI components
+- `src/layout` – page layout with header, footer and breadcrumbs
+- `src/pages` – React Router pages
+- `src/providers` – context providers (theme and cart)
+
+## License
+
+This project is provided for educational purposes and has no specific license.
