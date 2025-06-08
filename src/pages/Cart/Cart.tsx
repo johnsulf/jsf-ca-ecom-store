@@ -1,15 +1,13 @@
-
-
 /**
  * Cart page component module.
  *
  * @module CartPage
  * @description Displays items in the shopping cart, calculates totals, and provides actions for checkout and clearing the cart.
  */
-import { Link, useNavigate } from 'react-router-dom'
-import { Button } from '@/components/ui/button'
-import { useCart } from '@/providers/cart'
-import { toast } from 'sonner'
+import { Button } from '@/components/ui/button';
+import { useCart } from '@/providers/cart';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 
 /**
  * Cart component rendering the shopping cart content.
@@ -21,40 +19,40 @@ import { toast } from 'sonner'
  * @returns The cart page content.
  */
 export default function Cart() {
-  const { items, removeFromCart, clearCart } = useCart()
-  const navigate = useNavigate()
+  const { items, removeFromCart, clearCart } = useCart();
+  const navigate = useNavigate();
 
   /**
    * Calculates the total price of all items in the cart.
    */
   const total = items.reduce(
     (sum, i) => sum + i.product.discountedPrice * i.quantity,
-    0
-  )
+    0,
+  );
 
   /**
    * Clears all items from the cart and displays a toast notification.
    */
   function handleClear() {
-    clearCart()
-    toast(`🗑️ Cart cleared`)
+    clearCart();
+    toast(`🗑️ Cart cleared`);
   }
 
   if (items.length === 0) {
     return (
-      <div className="text-center py-20">
+      <div className="py-20 text-center">
         <p className="mb-4">Your cart is empty.</p>
         <Link to="/">
           <Button>Back to store</Button>
         </Link>
       </div>
-    )
+    );
   }
 
   return (
     <div className="space-y-6">
       {/* Hero */}
-      <h1 className='mb-8'>Cart</h1>
+      <h1 className="mb-8">Cart</h1>
       <ul className="space-y-4">
         {items.map(({ product, quantity }) => (
           <li key={product.id} className="flex items-center justify-between">
@@ -79,8 +77,7 @@ export default function Cart() {
                 variant="ghost"
                 size="icon"
                 onClick={() => removeFromCart(product.id)}
-                aria-label="Remove item"
-              >
+                aria-label="Remove item">
                 ×
               </Button>
             </div>
@@ -89,20 +86,18 @@ export default function Cart() {
       </ul>
 
       {/* Total */}
-      <div className="flex items-center justify-between pt-4 border-t">
+      <div className="flex items-center justify-between border-t pt-4">
         <p className="text-lg font-bold">Total:</p>
         <p className="text-lg font-bold">${total.toFixed(2)}</p>
       </div>
 
       {/* Actions */}
       <div className="flex gap-4">
-        <Button onClick={() => navigate('/checkout')}>
-          Checkout
-        </Button>
+        <Button onClick={() => navigate('/checkout')}>Checkout</Button>
         <Button variant="outline" onClick={handleClear}>
           Clear cart
         </Button>
       </div>
     </div>
-  )
+  );
 }

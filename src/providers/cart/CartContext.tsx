@@ -4,21 +4,21 @@
  * @module CartContext
  * @description Provides context and hooks for managing the shopping cart state.
  */
+import { Product } from '@/types/product';
 import {
   createContext,
-  useReducer,
-  useContext,
   ReactNode,
+  useContext,
   useEffect,
-} from 'react'
-import { CartItem, CartState } from './types'
-import { cartReducer, initialCartState } from './reducer'
-import { Product } from '@/types/product'
+  useReducer,
+} from 'react';
+import { cartReducer, initialCartState } from './reducer';
+import { CartItem, CartState } from './types';
 
 /**
  * LocalStorage key for persisting cart state.
  */
-const STORAGE_KEY = 'myapp-cart'
+const STORAGE_KEY = 'myapp-cart';
 
 /**
  * Context value for cart operations.
@@ -30,13 +30,13 @@ const STORAGE_KEY = 'myapp-cart'
  * @property {() => void} clearCart - Function to clear all items from the cart.
  */
 interface CartContextType {
-  items: CartItem[]
-  addToCart: (product: Product) => void
-  removeFromCart: (id: string) => void
-  clearCart: () => void
+  items: CartItem[];
+  addToCart: (product: Product) => void;
+  removeFromCart: (id: string) => void;
+  clearCart: () => void;
 }
 
-const CartContext = createContext<CartContextType | undefined>(undefined)
+const CartContext = createContext<CartContextType | undefined>(undefined);
 
 /**
  * Initializes cart state from localStorage or falls back to the provided initial state.
@@ -46,14 +46,14 @@ const CartContext = createContext<CartContextType | undefined>(undefined)
  */
 function init(initialState: CartState): CartState {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY)
+    const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
-      return JSON.parse(stored) as CartState
+      return JSON.parse(stored) as CartState;
     }
   } catch (err) {
-    console.error('Failed to load cart from localStorage', err)
+    console.error('Failed to load cart from localStorage', err);
   }
-  return initialState
+  return initialState;
 }
 
 /**
@@ -64,35 +64,30 @@ function init(initialState: CartState): CartState {
  * @returns The provider wrapping children with cart state and actions.
  */
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(
-    cartReducer,
-    initialCartState,
-    init
-  )
+  const [state, dispatch] = useReducer(cartReducer, initialCartState, init);
 
   useEffect(() => {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch (err) {
-      console.error('Failed to save cart to localStorage', err)
+      console.error('Failed to save cart to localStorage', err);
     }
-  }, [state])
+  }, [state]);
 
   const addToCart = (product: Product) =>
-    dispatch({ type: 'ADD_ITEM', product })
+    dispatch({ type: 'ADD_ITEM', product });
 
   const removeFromCart = (productId: string) =>
-    dispatch({ type: 'REMOVE_ITEM', productId })
+    dispatch({ type: 'REMOVE_ITEM', productId });
 
-  const clearCart = () => dispatch({ type: 'CLEAR_CART' })
+  const clearCart = () => dispatch({ type: 'CLEAR_CART' });
 
   return (
     <CartContext.Provider
-      value={{ items: state.items, addToCart, removeFromCart, clearCart }}
-    >
+      value={{ items: state.items, addToCart, removeFromCart, clearCart }}>
       {children}
     </CartContext.Provider>
-  )
+  );
 }
 
 /**
@@ -103,7 +98,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
  * @throws If called outside of a CartProvider.
  */
 export function useCart() {
-  const ctx = useContext(CartContext)
-  if (!ctx) throw new Error('useCart must be used within CartProvider')
-  return ctx
+  const ctx = useContext(CartContext);
+  if (!ctx) throw new Error('useCart must be used within CartProvider');
+  return ctx;
 }

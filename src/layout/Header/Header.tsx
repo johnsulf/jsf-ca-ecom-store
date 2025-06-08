@@ -25,12 +25,12 @@ import CartIcon from './components/CartIcon';
 export default function Header() {
   return (
     <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky border-b p-4 backdrop-blur">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="mx-auto flex max-w-7xl items-center justify-between">
         <div className="flex items-center gap-4">
           <a href="/">
             <img
               src="/assets/ecom.svg"
-              className="bg-white rounded-full p-1"
+              className="rounded-full bg-white p-1"
               width="60"
               alt="ecom store logo"
             />

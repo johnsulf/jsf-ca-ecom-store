@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
-import { cartReducer, initialCartState } from './reducer';
+import { describe, expect, it } from 'vitest';
 import type { Product } from '../../types/product';
+import { cartReducer, initialCartState } from './reducer';
 
 describe('cartReducer', () => {
   const productA: Product = {
@@ -27,7 +27,10 @@ describe('cartReducer', () => {
   };
 
   it('adds new items', () => {
-    const state = cartReducer(initialCartState, { type: 'ADD_ITEM', product: productA });
+    const state = cartReducer(initialCartState, {
+      type: 'ADD_ITEM',
+      product: productA,
+    });
     expect(state.items.length).toBe(1);
     expect(state.items[0].product).toBe(productA);
     expect(state.items[0].quantity).toBe(1);
@@ -41,7 +44,12 @@ describe('cartReducer', () => {
   });
 
   it('removes an item', () => {
-    const start = { items: [{ product: productA, quantity: 1 }, { product: productB, quantity: 1 }] };
+    const start = {
+      items: [
+        { product: productA, quantity: 1 },
+        { product: productB, quantity: 1 },
+      ],
+    };
     const state = cartReducer(start, { type: 'REMOVE_ITEM', productId: '1' });
     expect(state.items.length).toBe(1);
     expect(state.items[0].product.id).toBe('2');

@@ -4,8 +4,8 @@
  * @module Utils
  * @description Provides helper functions for class name concatenation and merging.
  */
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 /**
  * Combines and merges Tailwind CSS class names.

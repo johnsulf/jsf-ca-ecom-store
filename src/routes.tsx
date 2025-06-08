@@ -7,10 +7,10 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from './layout/Layout';
 import Cart from './pages/Cart/Cart';
+import Checkout from './pages/Checkout/Checkout';
 import Contact from './pages/Contact/Contact';
 import Home from './pages/Home/Home';
 import Product from './pages/Product/Product';
-import Checkout from './pages/Checkout/Checkout';
 
 /**
  * AppRoutes component that renders the application's routes.

@@ -3,8 +3,8 @@
  *
  * @module Footer
  * @description Renders the site footer with copyright information.
-*/
- 
+ */
+
 /**
  * Footer component displaying the application’s footer content.
  *

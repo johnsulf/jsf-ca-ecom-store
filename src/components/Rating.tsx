@@ -4,7 +4,7 @@
  * @module Rating
  * @description Renders star icons representing the rating and shows review count.
  */
-import { FaStar, FaStarHalfStroke, FaRegStar } from 'react-icons/fa6';
+import { FaRegStar, FaStar, FaStarHalfStroke } from 'react-icons/fa6';
 
 /**
  * Props for Rating component.
@@ -37,12 +37,9 @@ function Rating({ rating, reviewsCount }: RatingProps) {
         <FaStar key={i} className="text-yellow-500" />
       ))}
 
-      {Array.from(
-        { length: 5 - fullStars - (hasHalfStar ? 1 : 0) },
-        (_, i) => (
-          <FaRegStar key={i + fullStars} className="text-yellow-500" />
-        )
-      )}
+      {Array.from({ length: 5 - fullStars - (hasHalfStar ? 1 : 0) }, (_, i) => (
+        <FaRegStar key={i + fullStars} className="text-yellow-500" />
+      ))}
 
       {hasHalfStar && <FaStarHalfStroke className="text-yellow-500" />}
 
@@ -53,13 +50,13 @@ function Rating({ rating, reviewsCount }: RatingProps) {
       )}
 
       {reviewsCount > 0 && (
-        <span className="ml-2 text-sm text-muted-foreground">
+        <span className="text-muted-foreground ml-2 text-sm">
           ({reviewsCount})
         </span>
       )}
 
       {rating === 0 && reviewsCount === 0 && (
-        <p className="text-muted-foreground text-xs ml-1">No reviews</p>
+        <p className="text-muted-foreground ml-1 text-xs">No reviews</p>
       )}
     </div>
   );

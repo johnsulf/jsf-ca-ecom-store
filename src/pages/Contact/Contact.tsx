@@ -4,9 +4,9 @@
  * @module ContactPage
  * @description Provides a contact form with validation and submission handling.
  */
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { toast } from 'sonner'
+import { Button } from '@/components/ui/button';
+import { useState } from 'react';
+import { toast } from 'sonner';
 
 /**
  * Contact form state shape.
@@ -18,11 +18,11 @@ import { toast } from 'sonner'
  * @property body - Message body input value.
  */
 type FormState = {
-  name: string
-  subject: string
-  email: string
-  body: string
-}
+  name: string;
+  subject: string;
+  email: string;
+  body: string;
+};
 
 /**
  * Validation errors keyed by form field.
@@ -30,7 +30,7 @@ type FormState = {
  * @typedef FormErrors
  * @property [field] - Error message for a specific form field.
  */
-type FormErrors = Partial<Record<keyof FormState, string>>
+type FormErrors = Partial<Record<keyof FormState, string>>;
 
 /**
  * Contact component rendering the contact form with validation and submission logic.
@@ -44,9 +44,9 @@ export default function Contact() {
     subject: '',
     email: '',
     body: '',
-  })
+  });
 
-  const [errors, setErrors] = useState<FormErrors>({})
+  const [errors, setErrors] = useState<FormErrors>({});
 
   /**
    * Validates form values and returns any errors.
@@ -55,21 +55,21 @@ export default function Contact() {
    * @returns Validation errors keyed by field name.
    */
   function validate(values: FormState): FormErrors {
-    const errs: FormErrors = {}
+    const errs: FormErrors = {};
     if (values.name.trim().length < 3) {
-      errs.name = 'Full name must be at least 3 characters'
+      errs.name = 'Full name must be at least 3 characters';
     }
     if (values.subject.trim().length < 3) {
-      errs.subject = 'Subject must be at least 3 characters'
+      errs.subject = 'Subject must be at least 3 characters';
     }
-    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRe.test(values.email)) {
-      errs.email = 'Must be a valid email'
+      errs.email = 'Must be a valid email';
     }
     if (values.body.trim().length < 3) {
-      errs.body = 'Message must be at least 3 characters'
+      errs.body = 'Message must be at least 3 characters';
     }
-    return errs
+    return errs;
   }
 
   /**
@@ -78,12 +78,12 @@ export default function Contact() {
    * @param e - The input change event.
    */
   function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
-    const { name, value } = e.target
-    setForm((f) => ({ ...f, [name]: value }))
+    const { name, value } = e.target;
+    setForm((f) => ({ ...f, [name]: value }));
     // clear the error for this field as user types
-    setErrors((e) => ({ ...e, [name]: undefined }))
+    setErrors((e) => ({ ...e, [name]: undefined }));
   }
 
   /**
@@ -92,29 +92,29 @@ export default function Contact() {
    * @param e - The form submit event.
    */
   function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    const errs = validate(form)
+    e.preventDefault();
+    const errs = validate(form);
     if (Object.keys(errs).length) {
-      setErrors(errs)
-      return
+      setErrors(errs);
+      return;
     }
-  
-    console.log(form)
-    toast.success('Message sent! We’ll be in touch soon.')
-    
-    setForm({ name: '', subject: '', email: '', body: '' })
-    setErrors({})
+
+    console.log(form);
+    toast.success('Message sent! We’ll be in touch soon.');
+
+    setForm({ name: '', subject: '', email: '', body: '' });
+    setErrors({});
   }
 
   return (
     <>
       {/* Form */}
-      <div className="max-w-xl mx-auto mt-8 space-y-6">
+      <div className="mx-auto mt-8 max-w-xl space-y-6">
         <h1>Contact Us</h1>
         <form onSubmit={handleSubmit} noValidate className="space-y-4">
           {/* Full name */}
           <div>
-            <label className="block mb-1 font-medium" htmlFor="name">
+            <label className="mb-1 block font-medium" htmlFor="name">
               Full name
             </label>
             <input
@@ -124,7 +124,7 @@ export default function Contact() {
               autoComplete="name"
               value={form.name}
               onChange={handleChange}
-              className={`w-full rounded border px-3 py-2 focus:outline-none focus:ring ${
+              className={`w-full rounded border px-3 py-2 focus:ring focus:outline-none ${
                 errors.name ? 'border-red-600' : ''
               }`}
               required
@@ -137,7 +137,7 @@ export default function Contact() {
 
           {/* Subject */}
           <div>
-            <label className="block mb-1 font-medium" htmlFor="subject">
+            <label className="mb-1 block font-medium" htmlFor="subject">
               Subject
             </label>
             <input
@@ -146,7 +146,7 @@ export default function Contact() {
               type="text"
               value={form.subject}
               onChange={handleChange}
-              className={`w-full rounded border px-3 py-2 focus:outline-none focus:ring ${
+              className={`w-full rounded border px-3 py-2 focus:ring focus:outline-none ${
                 errors.subject ? 'border-red-600' : ''
               }`}
               required
@@ -159,7 +159,7 @@ export default function Contact() {
 
           {/* Email */}
           <div>
-            <label className="block mb-1 font-medium" htmlFor="email">
+            <label className="mb-1 block font-medium" htmlFor="email">
               Email
             </label>
             <input
@@ -168,7 +168,7 @@ export default function Contact() {
               type="email"
               value={form.email}
               onChange={handleChange}
-              className={`w-full rounded border px-3 py-2 focus:outline-none focus:ring ${
+              className={`w-full rounded border px-3 py-2 focus:ring focus:outline-none ${
                 errors.email ? 'border-red-600' : ''
               }`}
               required
@@ -180,7 +180,7 @@ export default function Contact() {
 
           {/* Body */}
           <div>
-            <label className="block mb-1 font-medium" htmlFor="body">
+            <label className="mb-1 block font-medium" htmlFor="body">
               Message
             </label>
             <textarea
@@ -189,7 +189,7 @@ export default function Contact() {
               rows={5}
               value={form.body}
               onChange={handleChange}
-              className={`w-full rounded border px-3 py-2 focus:outline-none focus:ring ${
+              className={`w-full rounded border px-3 py-2 focus:ring focus:outline-none ${
                 errors.body ? 'border-red-600' : ''
               }`}
               required
@@ -206,5 +206,5 @@ export default function Contact() {
         </form>
       </div>
     </>
-  )
+  );
 }

@@ -6,13 +6,13 @@
  *
  * @module Main
  */
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.tsx";
-import { BrowserRouter } from "react-router-dom";
-import { CartProvider } from "./providers/cart/CartContext.tsx";
-import { Toaster } from "sonner";
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import { Toaster } from 'sonner';
+import App from './App.tsx';
+import './index.css';
+import { CartProvider } from './providers/cart/CartContext.tsx';
 
 /**
  * Initializes and renders the React component tree.
@@ -20,7 +20,7 @@ import { Toaster } from "sonner";
  * Wraps <App /> in React.StrictMode, BrowserRouter, and CartProvider,
  * and attaches a Toaster for notifications.
  */
-createRoot(document.getElementById("root")!).render(
+createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <CartProvider>
@@ -28,5 +28,5 @@ createRoot(document.getElementById("root")!).render(
         <Toaster position="top-center" richColors />
       </CartProvider>
     </BrowserRouter>
-  </StrictMode>
+  </StrictMode>,
 );
