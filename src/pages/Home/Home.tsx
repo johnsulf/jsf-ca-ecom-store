@@ -1,9 +1,25 @@
 
+
+/**
+ * Home page component module.
+ *
+ * @module HomePage
+ * @description Fetches and displays a list of products with search functionality.
+ */
 import { getAllProducts } from '@/api/product-api'
 import { Product } from '@/types/product'
 import { useEffect, useState } from 'react'
 import ProductCard from './components/ProductCard'
 
+/**
+ * Home component that displays product listings.
+ *
+ * Fetches products on mount, handles loading and error states,
+ * and provides a search bar to filter products by title.
+ *
+ * @component
+ * @returns The content for the home page, including loading, error, and product grid.
+ */
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
@@ -11,6 +27,9 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
+    /**
+     * Fetches product data from the API, updating state and managing loading/error statuses.
+     */
     async function fetchData() {
       setLoading(true)
       try {
