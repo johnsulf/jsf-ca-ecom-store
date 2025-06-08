@@ -26,8 +26,8 @@ function init(initialState: CartState): CartState {
     if (stored) {
       return JSON.parse(stored) as CartState
     }
-  } catch {
-    // invalid JSON, ignore
+  } catch (err) {
+    console.error('Failed to load cart from localStorage', err)
   }
   return initialState
 }
@@ -42,8 +42,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-    } catch {
-      // handle error TODO
+    } catch (err) {
+      console.error('Failed to save cart to localStorage', err)
     }
   }, [state])
 
