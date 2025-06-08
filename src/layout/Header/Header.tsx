@@ -14,7 +14,12 @@ export default function Header() {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
       <div className='flex items-center gap-4'>
         <a href="/">
-        <img src="assets/ecom.svg" className="bg-white rounded-full p-1" width="60" alt="ecom store logo" />
+        <img
+            src="/assets/ecom.svg"
+            className="bg-white rounded-full p-1"
+            width="60"
+            alt="ecom store logo"
+          />
         </a>
         <NavigationMenu>
         <NavigationMenuList>
