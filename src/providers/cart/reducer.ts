@@ -1,7 +1,23 @@
+/**
+ * Cart reducer module.
+ *
+ * @module CartReducer
+ * @description Handles cart state updates in response to dispatched actions.
+ */
 import { CartAction, CartState } from './types';
 
+/**
+ * Initial state for the shopping cart.
+ */
 export const initialCartState: CartState = { items: [] };
 
+/**
+ * Reducer to manage cart state based on dispatched actions.
+ *
+ * @param state - Current cart state.
+ * @param action - Action to apply to the cart.
+ * @returns The updated cart state.
+ */
 export function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case 'ADD_ITEM': {
