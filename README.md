@@ -43,6 +43,14 @@ Run ESLint to check the code style:
 npm run lint
 ```
 
+## Testing
+
+Run the unit tests with:
+
+```bash
+npm test
+```
+
 ## Project structure
 
 - `src/api` – API helpers
