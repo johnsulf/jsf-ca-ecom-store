@@ -1,11 +1,28 @@
+/**
+ * Checkout page component module.
+ *
+ * @module CheckoutPage
+ * @description Clears cart on mount and displays order confirmation.
+ */
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from '@/providers/cart'
 import { Button } from '@/components/ui/button'
 
+/**
+ * Checkout component that thanks users for their order.
+ *
+ * On mount, clears the shopping cart.
+ *
+ * @component
+ * @returns The checkout confirmation page.
+ */
 export default function Checkout() {
   const { clearCart } = useCart()
 
+  /**
+   * Clears the cart when the component mounts.
+   */
   useEffect(() => {
     clearCart()
   }, [])

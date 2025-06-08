@@ -1,3 +1,9 @@
+/**
+ * ProductCard module.
+ *
+ * @module ProductCard
+ * @description Renders a product summary card displaying image, pricing, rating, and navigation to details.
+ */
 import { Button } from '@/components/ui/button'
 import {
   Card, CardContent, CardFooter, CardHeader, CardTitle,
@@ -7,10 +13,26 @@ import { ArrowRight } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import Rating from '@/components/Rating'
 
+/**
+ * Props for ProductCard component.
+ *
+ * @interface IProductCardProps
+ * @property {Product} product - The product to display in the card.
+ */
 export interface IProductCardProps {
   product: Product
 }
 
+/**
+ * ProductCard component displaying key product details.
+ *
+ * Renders the product image, title, description, price, discount badge, and rating,
+ * and enables navigation to the product details page.
+ *
+ * @component
+ * @param props - Component props.
+ * @returns The product card element.
+ */
 export default function ProductCard({ product }: IProductCardProps) {
   const navigate = useNavigate()
   const { price, discountedPrice, rating, image, title, description, id } = product

@@ -1,7 +1,22 @@
+/**
+ * Contact page component module.
+ *
+ * @module ContactPage
+ * @description Provides a contact form with validation and submission handling.
+ */
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 
+/**
+ * Contact form state shape.
+ *
+ * @typedef FormState
+ * @property name - Full name input value.
+ * @property subject - Subject input value.
+ * @property email - Email input value.
+ * @property body - Message body input value.
+ */
 type FormState = {
   name: string
   subject: string
@@ -9,8 +24,20 @@ type FormState = {
   body: string
 }
 
+/**
+ * Validation errors keyed by form field.
+ *
+ * @typedef FormErrors
+ * @property [field] - Error message for a specific form field.
+ */
 type FormErrors = Partial<Record<keyof FormState, string>>
 
+/**
+ * Contact component rendering the contact form with validation and submission logic.
+ *
+ * @component
+ * @returns The contact form element.
+ */
 export default function Contact() {
   const [form, setForm] = useState<FormState>({
     name: '',
@@ -21,6 +48,12 @@ export default function Contact() {
 
   const [errors, setErrors] = useState<FormErrors>({})
 
+  /**
+   * Validates form values and returns any errors.
+   *
+   * @param values - The current form values.
+   * @returns Validation errors keyed by field name.
+   */
   function validate(values: FormState): FormErrors {
     const errs: FormErrors = {}
     if (values.name.trim().length < 3) {
@@ -39,6 +72,11 @@ export default function Contact() {
     return errs
   }
 
+  /**
+   * Handles changes to form inputs, updating state and clearing field errors.
+   *
+   * @param e - The input change event.
+   */
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
@@ -48,6 +86,11 @@ export default function Contact() {
     setErrors((e) => ({ ...e, [name]: undefined }))
   }
 
+  /**
+   * Handles form submission, performing validation and showing a success toast on valid submit.
+   *
+   * @param e - The form submit event.
+   */
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     const errs = validate(form)

@@ -1,3 +1,9 @@
+/**
+ * Breadcrumbs module.
+ *
+ * @module Breadcrumbs
+ * @description Renders navigation breadcrumbs based on current route, including dynamic product titles.
+ */
 import { Fragment, useEffect, useState } from 'react'
 import { useLocation, Link, useParams } from 'react-router-dom'
 import {
@@ -18,6 +24,14 @@ const nameMap: Record<string, string> = {
   checkout: 'Checkout',
 }
 
+/**
+ * Breadcrumbs component generating a list of navigation links for the current path.
+ *
+ * Fetches product title for detailed product pages and constructs breadcrumb items accordingly.
+ *
+ * @component
+ * @returns The breadcrumb navigation element.
+ */
 export default function Breadcrumbs() {
   const { pathname } = useLocation()
   const params = useParams<{ id?: string }>()
@@ -27,6 +41,9 @@ export default function Breadcrumbs() {
 
   const [productTitle, setProductTitle] = useState<string>()
 
+  /**
+   * Side effect to load the product title when on a product detail route.
+   */
   useEffect(() => {
     if (onProductDetail && params.id) {
       getProductById(params.id)

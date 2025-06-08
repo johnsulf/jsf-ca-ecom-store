@@ -1,3 +1,9 @@
+/**
+ * Cart context module.
+ *
+ * @module CartContext
+ * @description Provides context and hooks for managing the shopping cart state.
+ */
 import {
   createContext,
   useReducer,
@@ -9,8 +15,20 @@ import { CartItem, CartState } from './types'
 import { cartReducer, initialCartState } from './reducer'
 import { Product } from '@/types/product'
 
+/**
+ * LocalStorage key for persisting cart state.
+ */
 const STORAGE_KEY = 'myapp-cart'
 
+/**
+ * Context value for cart operations.
+ *
+ * @interface CartContextType
+ * @property {CartItem[]} items - The items currently in the cart.
+ * @property {(product: Product) => void} addToCart - Function to add a product to the cart.
+ * @property {(id: string) => void} removeFromCart - Function to remove a product from the cart by ID.
+ * @property {() => void} clearCart - Function to clear all items from the cart.
+ */
 interface CartContextType {
   items: CartItem[]
   addToCart: (product: Product) => void
@@ -20,6 +38,12 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
+/**
+ * Initializes cart state from localStorage or falls back to the provided initial state.
+ *
+ * @param initialState - Default cart state.
+ * @returns The restored or default cart state.
+ */
 function init(initialState: CartState): CartState {
   try {
     const stored = localStorage.getItem(STORAGE_KEY)
@@ -32,6 +56,13 @@ function init(initialState: CartState): CartState {
   return initialState
 }
 
+/**
+ * CartProvider component to wrap parts of the app with cart context.
+ *
+ * @component
+ * @param props - The component props.
+ * @returns The provider wrapping children with cart state and actions.
+ */
 export function CartProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(
     cartReducer,
@@ -64,6 +95,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
   )
 }
 
+/**
+ * Hook to consume cart context.
+ *
+ * @function useCart
+ * @returns The current cart context value.
+ * @throws If called outside of a CartProvider.
+ */
 export function useCart() {
   const ctx = useContext(CartContext)
   if (!ctx) throw new Error('useCart must be used within CartProvider')

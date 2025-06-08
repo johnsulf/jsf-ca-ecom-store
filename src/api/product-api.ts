@@ -1,7 +1,20 @@
+/**
+ * Product API module.
+ *
+ * @module ProductAPI
+ * @description Provides functions to fetch product data from the backend API.
+ */
 import { Product, ProductResponse, ProductsResponse } from '@/types/product';
 import { BASE_API_URL } from './api';
 
-// Get all products
+/**
+ * Fetches all products from the API.
+ *
+ * @async
+ * @function getAllProducts
+ * @returns A promise resolving to an array of Product objects.
+ * @throws Error if the network response is not ok.
+ */
 export async function getAllProducts(): Promise<Product[]> {
   const response = await fetch(BASE_API_URL);
 
@@ -16,7 +29,15 @@ export async function getAllProducts(): Promise<Product[]> {
   return json.data;
 }
 
-// Get a single product by ID
+/**
+ * Fetches a single product by its ID.
+ *
+ * @async
+ * @function getProductById
+ * @param id - The ID of the product to fetch.
+ * @returns A promise resolving to the Product object.
+ * @throws Error if the network response is not ok.
+ */
 export async function getProductById(id: string): Promise<Product> {
   const response = await fetch(`${BASE_API_URL}/${id}`);
 

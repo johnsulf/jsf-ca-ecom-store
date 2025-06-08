@@ -1,18 +1,40 @@
 
+
+/**
+ * Cart page component module.
+ *
+ * @module CartPage
+ * @description Displays items in the shopping cart, calculates totals, and provides actions for checkout and clearing the cart.
+ */
 import { Link, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { useCart } from '@/providers/cart'
 import { toast } from 'sonner'
 
+/**
+ * Cart component rendering the shopping cart content.
+ *
+ * Shows a list of cart items with pricing and quantity, allows removing individual items,
+ * clearing the entire cart, and navigating to checkout.
+ *
+ * @component
+ * @returns The cart page content.
+ */
 export default function Cart() {
   const { items, removeFromCart, clearCart } = useCart()
   const navigate = useNavigate()
 
+  /**
+   * Calculates the total price of all items in the cart.
+   */
   const total = items.reduce(
     (sum, i) => sum + i.product.discountedPrice * i.quantity,
     0
   )
 
+  /**
+   * Clears all items from the cart and displays a toast notification.
+   */
   function handleClear() {
     clearCart()
     toast(`🗑️ Cart cleared`)

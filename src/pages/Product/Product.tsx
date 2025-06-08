@@ -1,3 +1,9 @@
+/**
+ * Product page component module.
+ *
+ * @module ProductPage
+ * @description Fetches and displays a single product detail, including image, pricing, and reviews.
+ */
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getProductById } from '@/api/product-api'
@@ -12,6 +18,15 @@ import { toast } from 'sonner'
 import Rating from '@/components/Rating'
 import { FaStar, FaStarHalfStroke, FaRegStar } from 'react-icons/fa6';
 
+/**
+ * Product component to display details for a single product.
+ *
+ * Fetches product data by ID from route parameters, handles loading and error states,
+ * and provides an action to add the product to the cart with a toast notification.
+ *
+ * @component
+ * @returns The product detail page content.
+ */
 export default function Product() {
   const { id } = useParams<{ id: string }>()
   const { addToCart } = useCart()
@@ -49,10 +64,13 @@ export default function Product() {
     ? Math.round(((price - discountedPrice) / price) * 100)
     : 0
 
-    function handleAdd() {
-      addToCart(product!)
-      toast.success(`"${product!.title}" added to cart`)
-    }
+  /**
+   * Adds the current product to the cart and shows a success toast.
+   */
+  function handleAdd() {
+    addToCart(product!)
+    toast.success(`"${product!.title}" added to cart`)
+  }
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
