@@ -61,7 +61,31 @@ npm test
 
 ## Component Library
 
-This project uses the [shadcn/ui](https://github.com/shadcn/ui) component library (also known as "chadcn") to provide a comprehensive set of styled UI components.
+The UI layer is built with **[shadcn/ui](https://ui.shadcn.com/)** – a collection of unstyled, accessible React components designed to be styled with **Tailwind CSS**.  
+Instead of shipping a monolithic package, `shadcn/ui` provides a small CLI that _copies_ component source files directly into the codebase.
+With this approach, each component resides within the repository, allowing full inspection, customisation, and extension of the markup or styles at any time.
+
+**Why shadcn/ui?**
+
+- **Accessibility first** – built on fully accessible Radix primitives.
+- **No vendor lock‑in** – components are local files, not opaque npm packages.
+- **Tailwind‑ready** – each component comes with sensible Tailwind classes you can tweak in seconds.
+- **Typesafe** – written in TypeScript with excellent IntelliSense support.
+
+### Tailwind CSS setup
+
+Tailwind serves as the utility‑first styling engine and pairs seamlessly with shadcn/ui:
+
+1. **Class merging** – the project uses the `cn()` helper (a thin wrapper around `clsx` + `tailwind-merge`) to avoid duplicate classes when composing styles.
+2. **Animations & dark mode** – shadcn/ui components include optional animation classes and respect the app’s dark/light theme via the `data-theme` attribute set by `ThemeProvider`.
+
+To scaffold a new component from the library, run:
+
+```bash
+npx shadcn-ui@latest add <component-name>
+```
+
+The CLI copies the source into `src/components/ui/` and automatically wires it up to the existing Tailwind setup.
 
 ## Documentation
 
