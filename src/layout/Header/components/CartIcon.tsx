@@ -1,9 +1,23 @@
+/**
+ * CartIcon module.
+ *
+ * @module CartIcon
+ * @description Displays the shopping cart icon with item count badge.
+ */
 
 import { Button } from '@/components/ui/button'
 import { useCart } from '@/providers/cart'
 import { ShoppingCart } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
+/**
+ * CartIcon component rendering a cart button with a badge count.
+ *
+ * Uses the useCart hook to retrieve the total item count and displays a badge if count is greater than zero.
+ *
+ * @component
+ * @returns The cart icon link element with item count badge.
+ */
 export default function CartIcon() {
   const { items } = useCart()
   const totalCount = items.reduce((sum, i) => sum + i.quantity, 0)
