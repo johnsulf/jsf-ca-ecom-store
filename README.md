@@ -1,6 +1,6 @@
 # JSF CA Ecom Store
 
-![Add a project screenshot here](public/assets/jsf.png)
+![Add a project screenshot here](public/assets/jsf.jpg)
 
 A full-stack-ready eCommerce demo showcasing product discovery, cart management, and checkout flows using the Noroff Online Shop API.
 
